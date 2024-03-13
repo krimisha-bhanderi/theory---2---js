@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+     <title>Form validation</title>
+</head>
+<body>
+     <form>
+          <table border="1" align="center" style="text-align: left;border: 1px solid #010101;" cellpadding="2" cellspacing="0">
+               <tr>
+                    <th>Name :- </th>
+                    <td>
+                         <input type="text" id="name">
+                         <span id="nameErr"></span>
+                    </td>
+               </tr>
+               <tr>
+                    <th>Email :- </th>
+                    <td>
+                         <input type="text" id="email">
+                         <span id="emailErr"></span>
+                    </td>
+               </tr>
+               <tr>
+                    <th>Password :- </th>
+                    <td>
+                         <input type="text" id="password">
+                         <span id="passwordErr"></span>
+                    </td>
+               </tr>
+               <tr>
+                    <th></th>
+                    <td>
+                         <input type="button" value="submit" onclick="save()">
+                    </td>
+               </tr>
+          </table>
+     </form>
+
+     <script>
+          let save=()=>{
+               let username = document.getElementById('name').value;
+               let useremail = document.getElementById('email').value;
+               let userpassword = document.getElementById('password').value;
+
+               if(!username){
+                    let n = document.getElementById('nameErr');
+                    n.innerHTML = "Name is required ";
+                    n.style.color = "red";
+               }
+               if(!useremail){
+                    let n = document.getElementById('emailErr');
+                    n.innerHTML = "Email is required ";
+                    n.style.color = "red";
+               }
+               if(!userpassword){
+                    let n = document.getElementById('passwordErr');
+                    n.innerHTML = "password is required ";
+                    n.style.color = "red";
+               }
+               else {
+                    var paserr = document.getElementById('passwordErr');
+                    if(userpassword.length < 8){
+                         paserr.innerHTML = "Password must be at least contain 8 characters";
+                         paserr.style.color = "red";
+                    }
+                    else if(userpassword.search(/[A-Z]/) < 0){
+                         paserr.innerHTML = "Password must contain at least one uppercase letter ";
+                    }
+                    else if (userpassword.search(/[a-z]/) < 0) {
+                         paserr.innerHTML = "Password must contain at least one lowercase letter";
+                    }
+                    else if(userpassword.search(/[0-9]/) < 0){
+                         paserr.innerHTML = "password must contain a number";
+                    }
+                    else{
+                        var special_char = /[! @ # $ % ^ & * ( ) + - _ | = ]/g;
+                        if (!userpassword.match(special_char)) {
+                              paserr.innerHTML = "password must contain at least one special charater";
+                              paserr.style.color = "red";
+                              
+                        } 
+                    }
+               }
+                    
+               alert('submitted succesfully...');
+               document.getElementById('name').value = "";
+               document.getElementById('email').value = "";
+               document.getElementById('password').value = "";
+          }
+     </script>
+</body>
+</html>
